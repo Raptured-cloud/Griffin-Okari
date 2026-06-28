@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, User, LogOut, Search, Activity, Menu } from 'lucide-react';
+import { ShoppingCart, User, LogOut, Activity, Menu, LayoutDashboard } from 'lucide-react';
 import { useCart } from '../../contexts/CartContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/Button';
@@ -24,6 +24,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">Shop All</Link>
               <Link to="/shop?category=Prescription" className="text-muted-foreground hover:text-foreground transition-colors">Prescriptions</Link>
               <Link to="/shop?category=Wellness" className="text-muted-foreground hover:text-foreground transition-colors">Wellness</Link>
+              <Link
+                to="/admin"
+                className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors font-medium"
+              >
+                <LayoutDashboard className="h-3.5 w-3.5" />
+                Admin
+              </Link>
             </nav>
           </div>
 
@@ -70,6 +77,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <Link to="/shop" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Shop All</Link>
             <Link to="/shop?category=Prescription" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Prescriptions</Link>
             <Link to="/shop?category=Wellness" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Wellness</Link>
+            <Link to="/admin" className="text-sm font-medium flex items-center gap-1.5" onClick={() => setIsMenuOpen(false)}>
+              <LayoutDashboard className="h-3.5 w-3.5" />
+              Admin Panel
+            </Link>
             {!user && <Link to="/auth" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Sign In</Link>}
           </div>
         )}
@@ -95,7 +106,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <ul className="space-y-2 text-sm text-primary-foreground/70">
               <li><Link to="/shop?category=Prescription" className="hover:text-white transition-colors">Prescriptions</Link></li>
               <li><Link to="/shop?category=OTC" className="hover:text-white transition-colors">Over-The-Counter</Link></li>
-              <li><Link to="/shop?category=Wellness" className="hover:text-white transition-colors">Vitamins & Supplements</Link></li>
+              <li><Link to="/shop?category=Wellness" className="hover:text-white transition-colors">Vitamins &amp; Supplements</Link></li>
               <li><Link to="/shop?category=Medical+Equipment" className="hover:text-white transition-colors">Medical Equipment</Link></li>
             </ul>
           </div>
@@ -103,7 +114,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <h4 className="font-semibold mb-4">Customer Service</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/70">
               <li>Contact Us</li>
-              <li>Shipping & Returns</li>
+              <li>Shipping &amp; Returns</li>
               <li>FAQ</li>
               <li>Privacy Policy</li>
             </ul>

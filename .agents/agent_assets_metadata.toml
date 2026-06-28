@@ -1,0 +1,14 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "S1OuWoEPdIoXVsfmSoxTY"
+uri = "file://screenshots/admin-product-list.jpg"
+type = "image"
+title = "Admin Panel — Display All Products (READ)"
+
+[[outputs]]
+id = "_CwGcIbkxNrdr2TQerzaP"
+uri = "file://screenshots/home.jpg"
+type = "image"
+title = "Home Page — with Admin nav link"
