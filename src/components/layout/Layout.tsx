@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingCart, User, LogOut, Activity, Menu, LayoutDashboard } from 'lucide-react';
+import { ShoppingCart, User, LogOut, Activity, Menu, LayoutDashboard, ShieldCheck } from 'lucide-react';
 import { useCart } from '../../contexts/CartContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/Button';
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { cartCount } = useCart();
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const { cartCount }            = useCart();
+  const { user, logout, isAdmin } = useAuth();
+  const navigate                  = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
@@ -24,13 +24,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">Shop All</Link>
               <Link to="/shop?category=Prescription" className="text-muted-foreground hover:text-foreground transition-colors">Prescriptions</Link>
               <Link to="/shop?category=Wellness" className="text-muted-foreground hover:text-foreground transition-colors">Wellness</Link>
-              <Link
-                to="/admin"
-                className="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors font-medium"
-              >
-                <LayoutDashboard className="h-3.5 w-3.5" />
-                Admin
-              </Link>
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  className="flex items-center gap-1.5 text-primary hover:text-primary/80 transition-colors font-semibold"
+                >
+                  <LayoutDashboard className="h-3.5 w-3.5" />
+                  Admin
+                </Link>
+              )}
             </nav>
           </div>
 
@@ -38,11 +40,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <Menu className="h-5 w-5" />
             </Button>
-            
+
             <div className="hidden md:flex items-center gap-2">
               {user ? (
-                <div className="flex items-center gap-4">
-                  <span className="text-sm text-muted-foreground">Hi, {user.name}</span>
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    {isAdmin && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                        <ShieldCheck className="h-3 w-3" />
+                        Admin
+                      </span>
+                    )}
+                    <span className="text-sm text-muted-foreground">Hi, {user.name}</span>
+                  </div>
                   <Button variant="ghost" size="icon" onClick={logout} title="Logout">
                     <LogOut className="h-4 w-4" />
                   </Button>
@@ -70,18 +80,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </div>
-        
+
         {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden border-t p-4 flex flex-col gap-4 bg-background">
             <Link to="/shop" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Shop All</Link>
             <Link to="/shop?category=Prescription" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Prescriptions</Link>
             <Link to="/shop?category=Wellness" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Wellness</Link>
-            <Link to="/admin" className="text-sm font-medium flex items-center gap-1.5" onClick={() => setIsMenuOpen(false)}>
-              <LayoutDashboard className="h-3.5 w-3.5" />
-              Admin Panel
-            </Link>
+            {isAdmin && (
+              <Link to="/admin" className="text-sm font-medium flex items-center gap-1.5 text-primary" onClick={() => setIsMenuOpen(false)}>
+                <LayoutDashboard className="h-3.5 w-3.5" />
+                Admin Panel
+              </Link>
+            )}
             {!user && <Link to="/auth" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Sign In</Link>}
+            {user && (
+              <button className="text-sm font-medium text-left text-muted-foreground" onClick={() => { logout(); setIsMenuOpen(false); }}>
+                Sign Out
+              </button>
+            )}
           </div>
         )}
       </header>

@@ -12,3 +12,21 @@ id = "_CwGcIbkxNrdr2TQerzaP"
 uri = "file://screenshots/home.jpg"
 type = "image"
 title = "Home Page — with Admin nav link"
+
+[[outputs]]
+id = "-ZOlSyb4sXPkDRLhTU2sk"
+uri = "file://screenshots/home-logged-out.jpg"
+type = "image"
+title = "Home — Admin link hidden (not logged in)"
+
+[[outputs]]
+id = "eNfYHDKwlNUYP4yVMUDeN"
+uri = "file://screenshots/login-page.jpg"
+type = "image"
+title = "Sign In — Admin credentials hint shown"
+
+[[outputs]]
+id = "8UW6YXncrO6YdLpftfApT"
+uri = "file://screenshots/unauthorized.jpg"
+type = "image"
+title = "Access Denied — customer or logged-out user hits /admin"
