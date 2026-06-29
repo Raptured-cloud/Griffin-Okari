@@ -6,10 +6,16 @@ import { useAuth } from '../../contexts/AuthContext';
 import { Button } from '../ui/Button';
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { cartCount }            = useCart();
+  const { cartCount }             = useCart();
   const { user, logout, isAdmin } = useAuth();
   const navigate                  = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const handleLogout = async () => {
+    setIsMenuOpen(false);
+    await logout();          // server deletes the session row
+    navigate('/', { replace: true });  // redirect to home
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -37,23 +43,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(o => !o)}
+            >
               <Menu className="h-5 w-5" />
             </Button>
 
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-3">
               {user ? (
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2">
-                    {isAdmin && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                        <ShieldCheck className="h-3 w-3" />
-                        Admin
-                      </span>
-                    )}
-                    <span className="text-sm text-muted-foreground">Hi, {user.name}</span>
-                  </div>
-                  <Button variant="ghost" size="icon" onClick={logout} title="Logout">
+                  {isAdmin && (
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                      <ShieldCheck className="h-3 w-3" />
+                      Admin
+                    </span>
+                  )}
+                  <span className="text-sm text-muted-foreground">Hi, {user.name}</span>
+                  <Button variant="ghost" size="icon" onClick={handleLogout} title="Sign out">
                     <LogOut className="h-4 w-4" />
                   </Button>
                 </div>
@@ -93,19 +102,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 Admin Panel
               </Link>
             )}
-            {!user && <Link to="/auth" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Sign In</Link>}
-            {user && (
-              <button className="text-sm font-medium text-left text-muted-foreground" onClick={() => { logout(); setIsMenuOpen(false); }}>
-                Sign Out
-              </button>
-            )}
+            {!user
+              ? <Link to="/auth" className="text-sm font-medium" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
+              : <button className="text-sm font-medium text-left text-muted-foreground flex items-center gap-2" onClick={handleLogout}>
+                  <LogOut className="h-3.5 w-3.5" /> Sign Out
+                </button>
+            }
           </div>
         )}
       </header>
 
-      <main className="flex-1">
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
 
       <footer className="bg-primary text-primary-foreground py-12 mt-12">
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -140,7 +147,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <h4 className="font-semibold mb-4">Newsletter</h4>
             <p className="text-sm text-primary-foreground/70 mb-4">Subscribe to receive health tips and exclusive offers.</p>
             <div className="flex gap-2">
-              <input type="email" placeholder="Email address" className="bg-primary-foreground/10 border-primary-foreground/20 rounded-md px-3 py-2 text-sm flex-1 outline-none focus:ring-2 focus:ring-white/50 text-white placeholder:text-white/50" />
+              <input
+                type="email"
+                placeholder="Email address"
+                className="bg-primary-foreground/10 border-primary-foreground/20 rounded-md px-3 py-2 text-sm flex-1 outline-none focus:ring-2 focus:ring-white/50 text-white placeholder:text-white/50"
+              />
               <Button variant="secondary">Subscribe</Button>
             </div>
           </div>

@@ -30,3 +30,9 @@ id = "8UW6YXncrO6YdLpftfApT"
 uri = "file://screenshots/unauthorized.jpg"
 type = "image"
 title = "Access Denied — customer or logged-out user hits /admin"
+
+[[outputs]]
+id = "b7rNuBrWU6SilbwCduBnw"
+uri = "file://screenshots/auth-login.jpg"
+type = "image"
+title = "Sign In — real PHP credential validation + session creation"
