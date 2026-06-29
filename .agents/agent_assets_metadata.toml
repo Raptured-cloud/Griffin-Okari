@@ -5,7 +5,7 @@ generated = []
 id = "S1OuWoEPdIoXVsfmSoxTY"
 uri = "file://screenshots/admin-product-list.jpg"
 type = "image"
-title = "Admin Panel — Display All Products (READ)"
+title = "5. Admin Panel — only accessible after signing in as admin"
 
 [[outputs]]
 id = "_CwGcIbkxNrdr2TQerzaP"
@@ -36,3 +36,27 @@ id = "b7rNuBrWU6SilbwCduBnw"
 uri = "file://screenshots/auth-login.jpg"
 type = "image"
 title = "Sign In — real PHP credential validation + session creation"
+
+[[outputs]]
+id = "touZBZixBQHbSWTMYya8e"
+uri = "file://screenshots/01-login-form.jpg"
+type = "image"
+title = "1. Sign In page — email + password form with admin credentials hint"
+
+[[outputs]]
+id = "ebc27V0_0tsd_OxBRcH-3"
+uri = "file://screenshots/auth-register.jpg"
+type = "image"
+title = "2. Register tab — create a new customer account"
+
+[[outputs]]
+id = "99FyHAHtMp4LsAbnbGLQQ"
+uri = "file://screenshots/04-access-denied.jpg"
+type = "image"
+title = "3. Access Denied — shown when a non-admin tries to reach /admin"
+
+[[outputs]]
+id = "dSQql3ia4JaQt0Wq7mAs-"
+uri = "file://screenshots/05-admin-redirected-to-login.jpg"
+type = "image"
+title = "4. Visiting /admin while logged out — auto-redirected to Sign In"
