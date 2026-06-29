@@ -60,3 +60,21 @@ id = "dSQql3ia4JaQt0Wq7mAs-"
 uri = "file://screenshots/05-admin-redirected-to-login.jpg"
 type = "image"
 title = "4. Visiting /admin while logged out — auto-redirected to Sign In"
+
+[[outputs]]
+id = "5IvRC6ZpVwzvh-BlbDQu7"
+uri = "file://screenshots/profile-desktop.jpg"
+type = "image"
+title = "🖥️ Desktop View — full 3-column layout"
+
+[[outputs]]
+id = "C0Ait2Aq5RmiCjo9LS_-2"
+uri = "file://screenshots/profile-tablet.jpg"
+type = "image"
+title = "📱 Tablet View — 768px centred, tighter cards"
+
+[[outputs]]
+id = "iG6sezll0n7okIb6bwx-N"
+uri = "file://screenshots/profile-mobile.jpg"
+type = "image"
+title = "📲 Mobile View — 390px stacked single-column"

@@ -30,6 +30,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <Link to="/shop" className="text-muted-foreground hover:text-foreground transition-colors">Shop All</Link>
               <Link to="/shop?category=Prescription" className="text-muted-foreground hover:text-foreground transition-colors">Prescriptions</Link>
               <Link to="/shop?category=Wellness" className="text-muted-foreground hover:text-foreground transition-colors">Wellness</Link>
+              <Link to="/profile" className="text-muted-foreground hover:text-foreground transition-colors">Our Pharmacist</Link>
               {isAdmin && (
                 <Link
                   to="/admin"
